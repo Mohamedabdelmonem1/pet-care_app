@@ -4,11 +4,9 @@ import 'package:petcare_app/helper/constants.dart';
 import 'package:petcare_app/helper/end_points.dart';
 import 'package:petcare_app/helper/remote/dio_helper.dart';
 import 'package:petcare_app/helper/snack_helper.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../components.dart';
 
 class AddProdect extends StatefulWidget {
@@ -66,24 +64,92 @@ class _AddProdectState extends State<AddProdect> {
                               image: AssetImage("images/31.jpg"),
                               fit: BoxFit.fill)),
                       child: Center(
-                          child: MaterialButton(
-                        onPressed: () async {
-                          var pickedImage = await ImagePicker()
-                              .pickImage(source: ImageSource.camera);
-                          if (pickedImage != null) {
-                            setState(() {
-                              imagetwo = File(pickedImage.path);
-                            });
-                          }
-                        },
-                        child: Container(
-                          width: 340.w,
-                          height: 200.h,
-                          decoration: BoxDecoration(
-                              color: Colors.white12,
-                              borderRadius: BorderRadius.circular(25)),
+                        child: MaterialButton(
+                          onPressed: () {
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (context) {
+                                  return SizedBox(
+                                    height: 200,
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          "Choose photo from",
+                                          style: TextStyle(
+                                              fontSize: 30,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        MaterialButton(
+                                          onPressed: () async {
+                                            var pickedImage =
+                                                await ImagePicker().pickImage(
+                                                    source: ImageSource.camera);
+                                            if (pickedImage != null) {
+                                              setState(() {
+                                                imagetwo =
+                                                    File(pickedImage.path);
+                                              });
+                                            }
+                                          },
+                                          child: const Row(
+                                            children: [
+                                              Icon(Icons.camera),
+                                              SizedBox(
+                                                width: 20,
+                                              ),
+                                              Text(
+                                                "open your camera",
+                                                style: TextStyle(fontSize: 20),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        MaterialButton(
+                                          onPressed: () async {
+                                            var pickedImage =
+                                                await ImagePicker().pickImage(
+                                                    source:
+                                                        ImageSource.gallery);
+                                            if (pickedImage != null) {
+                                              setState(() {
+                                                imagetwo =
+                                                    File(pickedImage.path);
+                                              });
+                                            }
+                                          },
+                                          child: const Row(
+                                            children: [
+                                              Icon(Icons.photo_outlined),
+                                              SizedBox(
+                                                width: 20,
+                                              ),
+                                              Text(
+                                                "open your gallery",
+                                                style: TextStyle(fontSize: 20),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                });
+                          },
+                          child: Container(
+                            width: 340.w,
+                            height: 200,
+                            decoration: BoxDecoration(
+                                color: Colors.white12,
+                                borderRadius: BorderRadius.circular(25)),
+                          ),
                         ),
-                      )),
+                      ),
                     ),
                     SizedBox(
                       height: 30.h,

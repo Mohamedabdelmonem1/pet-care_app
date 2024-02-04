@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:petcare_app/components.dart';
 import 'package:petcare_app/helper/constants.dart';
@@ -7,10 +6,8 @@ import 'package:petcare_app/helper/end_points.dart';
 import 'package:petcare_app/helper/remote/dio_helper.dart';
 import 'package:petcare_app/helper/snack_helper.dart';
 import 'package:petcare_app/pages/profile/edit_profile.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 
 class add_animal extends StatefulWidget {
   const add_animal({Key? key}) : super(key: key);
@@ -55,27 +52,91 @@ class _add_animalState extends State<add_animal> {
                 height: 80,
               ),
               Center(
-                  child: MaterialButton(
-                onPressed: () async {
-                  var pickedImage =
-                      await ImagePicker().pickImage(source: ImageSource.camera);
-                  if (pickedImage != null) {
-                    setState(() async {
-                      imagetwo = File(pickedImage.path);
-
-                      // var path = baseName(value.path);
-                      file = await MultipartFile.fromFile(imagetwo.path);
-                    });
-                  }
-                },
-                child: Container(
-                  width: 340,
-                  height: 200,
-                  decoration: BoxDecoration(
-                      color: Colors.white12,
-                      borderRadius: BorderRadius.circular(25)),
+                child: MaterialButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return SizedBox(
+                            height: 200,
+                            child: Column(
+                              children: [
+                                Text(
+                                  "Choose photo from",
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                MaterialButton(
+                                  onPressed: () async {
+                                    var pickedImage = await ImagePicker()
+                                        .pickImage(source: ImageSource.camera);
+                                    if (pickedImage != null) {
+                                      setState(() async {
+                                        imagetwo = File(pickedImage.path);
+                                        file = await MultipartFile.fromFile(
+                                            imagetwo.path);
+                                      });
+                                    }
+                                  },
+                                  child: const Row(
+                                    children: [
+                                      Icon(Icons.camera),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Text(
+                                        "open your camera",
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                MaterialButton(
+                                  onPressed: () async {
+                                    var pickedImage = await ImagePicker()
+                                        .pickImage(source: ImageSource.gallery);
+                                    if (pickedImage != null) {
+                                      setState(() async {
+                                        imagetwo = File(pickedImage.path);
+                                        file = await MultipartFile.fromFile(
+                                            imagetwo.path);
+                                      });
+                                    }
+                                  },
+                                  child: const Row(
+                                    children: [
+                                      Icon(Icons.photo_outlined),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Text(
+                                        "open your gallery",
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        });
+                  },
+                  child: Container(
+                    width: 340,
+                    height: 200,
+                    decoration: BoxDecoration(
+                        color: Colors.white12,
+                        borderRadius: BorderRadius.circular(25)),
+                  ),
                 ),
-              )),
+              ),
               SizedBox(
                 height: 17,
               ),

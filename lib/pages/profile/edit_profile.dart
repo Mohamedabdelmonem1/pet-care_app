@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:petcare_app/components.dart';
@@ -6,7 +5,6 @@ import 'package:petcare_app/helper/constants.dart';
 import 'package:petcare_app/helper/end_points.dart';
 import 'package:petcare_app/helper/remote/dio_helper.dart';
 import 'package:petcare_app/helper/snack_helper.dart';
-import 'package:petcare_app/models/auth.dart';
 import 'package:petcare_app/models/pets.dart';
 import 'package:petcare_app/pages/profile/add_animal.dart';
 import 'package:petcare_app/pages/profile/profile.dart';

@@ -190,7 +190,7 @@ class _ProfileState extends State<Profile> {
                         Center(
                             child: Container(
                           width: 370.w,
-                          height: 280.h,
+                          height: 283.h,
                           decoration: BoxDecoration(
                               color: Colors.white,
                               border: Border.all(width: 2, color: Colors.black),

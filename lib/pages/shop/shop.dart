@@ -338,7 +338,7 @@ class _shopState extends State<shop> {
                     ),
                     MaterialButton(
                       onPressed: () {
-                        getProducts(4);
+                        getProducts(5);
                         Navigator.of(context).pop();
                       },
                       child: Text(
@@ -348,7 +348,7 @@ class _shopState extends State<shop> {
                     ),
                     MaterialButton(
                       onPressed: () {
-                        getProducts(5);
+                        getProducts(4);
                         Navigator.of(context).pop();
                       },
                       child: Text(

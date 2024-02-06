@@ -39,7 +39,7 @@ class _shopState extends State<shop> {
     super.initState();
     getProducts(50);
     getMyCart();
-    Future.delayed(const Duration(seconds: 10), () async {
+    Future.delayed(const Duration(seconds: 5), () async {
       String user = await getRecommendedUser();
       showMessageWithUser(user);
     });
